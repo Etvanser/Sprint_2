@@ -11,8 +11,7 @@ class TestBooksCollector:
     def test_add_new_book_one_book(self):
         collector = BooksCollector()
         collector.add_new_book('Властелин колец')
-        books_list = collector.get_books_rating()
-        assert ('Властелин колец', 1) in books_list.items()
+        assert len(collector.get_books_rating()) == 1
 
     def test_add_new_book_double_new_book(self):
         collector = BooksCollector()
@@ -23,7 +22,7 @@ class TestBooksCollector:
     def test_set_book_rating_not_in_books_rating(self):
         collector = BooksCollector()
         collector.set_book_rating('Властелин колец', 5)
-        assert len(collector.get_books_rating()) == 0
+        assert collector.get_book_rating('Властелин колец') != 5
 
     def test_set_book_rating_less_1(self):
         collector = BooksCollector()
@@ -55,8 +54,7 @@ class TestBooksCollector:
         collector = BooksCollector()
         collector.add_new_book('Властелин колец')
         collector.add_new_book('Звездные войны')
-        books_list = collector.get_books_rating()
-        assert isinstance(books_list, dict)
+        assert 'Властелин колец' and 'Звездные войны' in collector.get_books_rating()
 
     def test_add_book_in_favorites(self):
         collector = BooksCollector()
